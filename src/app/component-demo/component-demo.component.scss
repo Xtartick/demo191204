@@ -1,0 +1,18 @@
+:host {
+  display: block ;
+  font-size: 25px;
+  height: 100px;
+  text-align: center;
+  color: red;
+  background-color: bisque;
+}
+
+:host-context(.colorA) {
+  background-color: rgb(126, 126, 219);
+  color: #161616;
+}
+
+:host-context(.colorB) {
+  background-color: #161616;
+  color: #ffffff;
+}
