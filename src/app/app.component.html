@@ -1,12 +1,21 @@
 <!-- <router-outlet></router-outlet>  -->
-<nav>
+<!-- <nav>
     <button (click)="show()" >Component Styles > Specal Selectors > :host</button>
     <button (click)="show2()" >Dynamic Component Loader > @Directive > ng-templat</button>
 </nav>
 
 <div #showdiv class="div"></div>
 
-<app-component-demo></app-component-demo>
+<app-component-demo></app-component-demo> -->
 
 <!-- <app-adbanner [ads]="ads"></app-adbanner> -->
-<app-banner></app-banner>
+<form action="">
+  <label for="">no.1</label><input type="checkbox" name="1" id="" [(ngModel)]="com1"><br>
+  <label for="">no.2</label><input type="checkbox" name="2" id="" [(ngModel)]="com2"><br>
+  <label for="">no.3</label><input type="checkbox" name="3" id="" [(ngModel)]="com3"><br>
+  <label for="">no.4</label><input type="checkbox" name="4" id="" [(ngModel)]="com4"><br>
+  <input  type="reset" value="reset" (click)="clear()">
+  <button (click)="getResult()">result</button>
+</form>
+<app-banner *ngIf="showCom" [callback]="bindCallBack"></app-banner>
+

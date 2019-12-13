@@ -1,46 +1,49 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, ViewContainerRef, Input, OnDestroy } from '@angular/core';
 import { PicDirective } from '../pic.directive';
 import { Pic } from '../pic';
-import { PicService, picItem } from '../pic.service';
+import { PicService } from '../pic.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
-export class BannerComponent implements OnInit {
-  @ViewChild(PicDirective,{ static: true }) picHost : PicDirective;
+export class BannerComponent implements OnInit, OnDestroy {
+
+  @Input() callback: void;
   // @ViewChild('vc', { static: true }) vc : ViewContainerRef;
-  public img:picItem[];
-  public currentAdIndex = -1;
-  public interval:any;
+  @ViewChild(PicDirective, { static: true }) picHost: PicDirective;
+  public img;
+  public interval: Subscription;
 
-  constructor(private service: PicService,private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(private service: PicService) { }
 
-  ngOnInit() {    
-    this.img = this.service.getPic();
+  ngOnInit() {
+    this.executeSet();
+    this.callback = this.loadComponent();
+  }
+
+  loadComponent() {
+    this.service.loadComponent(this.picHost);
+  }
+
+
+  getAds() {
+    const source = interval(2000);
+    this.interval = source.subscribe( val => {
+      this.loadComponent();
+    });
+  }
+
+  executeSet() {
     this.loadComponent();
     this.getAds();
   }
 
-  
-  loadComponent() {
-    this.currentAdIndex = (this.currentAdIndex + 1) % this.img.length;
-    let picItem = this.img[this.currentAdIndex];
+  ngOnDestroy(): void {
+    this.interval.unsubscribe();
 
-    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(picItem.component);
-
-    let viewContainerRef = this.picHost.viewContainerRef;
-    viewContainerRef.clear();
-
-    let componentRef = viewContainerRef.createComponent(componentFactory);
-    (<Pic>componentRef.instance).data = picItem.data;
-  }
-
-  getAds() {
-    this.interval = setInterval(() => {
-      this.loadComponent();
-    }, 2000);
   }
 
 }

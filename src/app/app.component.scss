@@ -1,48 +1,53 @@
-nav{
-    height: 6vh;
-    background-color: blue;
-    button{
-        margin:10px;
-    }
+nav {
+  height: 6vh;
+  background-color: blue;
+  button {
+    margin: 10px;
+  }
 }
 
-.div{
-    background-color: white;
-    height: 90vh;
-    width: 100vw;
-    position: absolute;
-    z-index: 999;
+.div {
+  background-color: white;
+  height: 90vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 999;
 }
 
-.animation{
-    animation-name: slideDown;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
+.animation {
+  animation-name: slideDown;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
 
-@keyframes slideDown{
-    from{
-        top: 8vh;
-    }
-    to{
-        top : 23vh; 
-        height: 70vh;
-    }
+button :active {
+  background-color: black;
+  color: white;
 }
 
-.animation2{
-    animation-name: slideDown2;
-    animation-duration: 3s;
-    animation-fill-mode: forwards;
+@keyframes slideDown {
+  from {
+    top: 8vh;
+  }
+  to {
+    top: 23vh;
+    height: 70vh;
+  }
 }
 
-@keyframes slideDown2{
-    from{
-        top: 23vh;
-        height: 70vh;
-    }
-    to{
-        top : 80vh; 
-        height: 0;
-    }
+.animation2 {
+  animation-name: slideDown2;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideDown2 {
+  from {
+    top: 23vh;
+    height: 70vh;
+  }
+  to {
+    top: 80vh;
+    height: 0;
+  }
 }
